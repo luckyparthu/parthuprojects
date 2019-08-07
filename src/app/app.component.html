@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <form name="eventReg" onsubmit="return checkData()">
+    Event Name :<input type="type" name="eventName"><br>
+    Start Date :<input type="date" name="startDate"> <br>
+
+    <div id="dvEndDate" style="display: block">
+      End Date:
+      <input type="date" name="endDate" />
+    </div>
+    <input type="checkbox" name="allDay" id="allDays" onclick="return ShowHideDiv(this)">All Day<br>
+    <h3>Event Detail</h3>
+    Location:<input type="text" name="location"><br>
+    Email:<input type="email" name="email"><br>
+    Description:<input type="text" name="description"><br>
+    <input type="submit" name="save">
+    <input type="button" value="Delete Record" onclick="return deleteData()">
+    <input type="button" value="show data" onclick="return showData()">
+  </form>
+  <!-- <a routerLink="/eventslist">Event List</a> -->
+  <hr>
+  <h3>Guest Details</h3>
+  <form name="guestReg" onsubmit="return checkGuest()">
+    Event Name: <input type="text" name="eventname"><br>
+    Guest Name: <input type="text" name="gname"><br>
+    Guest City: <input type="text" name="gcity"><br>
+    Guest Mobile: <input type="text" name="gmobile"><br>
+    <input type="submit" value="Add Guest">
+  </form>
+  <hr>
+  <table id="myTable" border="1">
+    <tr>
+      <th>Event Name</th>
+      <th>Event Date</th>
+      <th>Event End Date</th>
+      <th>Event Location</th>
+      <th>Event Email</th>
+      <th>Event Description</th>
+    </tr>
+  </table>
+  <hr>
+  <table id="guestTable" border="1">
+    <tr>
+      <th>Event Name</th>
+      <th>Guest Name</th>
+      <th>Guest City</th>
+      <th>Guest Mobile</th>
+    </tr>
+  </table>
+  <div style="text-align: left;">
+    <input type="button" value="Show Guest List" onclick="gshowData()">
+
+  </div>
+  <router-outlet></router-outlet>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>PractDemo</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#chEndDate").click(function () {
+        if ($(this).is(":checked")) {
+          $("#dvPassport").show();
+        } else {
+          $("#dvPassport").hide();
+        }
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    var arr = new Array();
+    var garr = new Array();
+    function ShowHideDiv(chEndDate) {
+      var dvEndDate = document.getElementById("dvEndDate");
+      dvEndDate.style.display = chEndDate.checked ? "none" : "block";
+
+    }
+    function getData() {
+      var str = localStorage.getItem("localData");
+      if (str != null)
+        arr = JSON.parse(str);
+    }
+    function checkData() {
+      getData();
+      arr.push({
+        name: document.forms['eventReg']['eventName'].value,
+        startDate: document.forms['eventReg']['startDate'].value,
+        endDate: document.forms['eventReg']['endDate'].value,
+        location: document.forms['eventReg']['location'].value,
+        email: document.forms['eventReg']['email'].value,
+        description: document.forms['eventReg']['description'].value
+
+      });
+      var name = document.forms['eventReg']['eventName'].value;
+      var startDate = document.forms['eventReg']['startDate'].value;
+      var endDate = document.forms['eventReg']['endDate'].value;
+      var location = document.forms['eventReg']['location'].value;
+      var email = document.forms['eventReg']['email'].value;
+      var description = document.forms['eventReg']['description'].value;
+
+      if (name == "") {
+        alert("name can not blank");
+        return false;
+      } else if (startDate == "") {
+        alert("start date can not blank");
+        return false;
+      } else if (location == "") {
+        alert("location can not be blank");
+        return false;
+      } else if (email == "") {
+        alert("email can not be blank");
+        return false;
+      } else if (description == "") {
+        alert("description can not be blank");
+        return false;
+      }
+
+      localStorage.setItem("localData", JSON.stringify(arr));
+      showData();
+
+    }
+    function deleteData() {
+      localStorage.clear();
+    }
+
+    function showData() {
+      getData();
+      var tbl = document.getElementById("myTable");
+      for (i = 0; i < arr.length; i++) {
+        var r = tbl.insertRow();
+        var ename = r.insertCell();
+        var edate = r.insertCell();
+        var eedate = r.insertCell();
+        var eloc = r.insertCell();
+        var eemail = r.insertCell();
+        var edesc = r.insertCell();
+
+        ename.innerHTML = arr[i].name;
+        edate.innerHTML = arr[i].startDate;
+        eedate.innerHTML = arr[i].endDate;
+        eloc.innerHTML = arr[i].location;
+        eemail.innerHTML = arr[i].email;
+        edesc.innerHTML = arr[i].description;
+      }
+    }
+
+    function ggetData() {
+      var gstr = localStorage.getItem("guestLocalData");
+      if (gstr != null)
+        garr = JSON.parse(gstr);
+    }
+
+    function checkGuest() {
+      ggetData()
+      garr.push({
+        evnetname: document.forms['guestReg']['eventname'].value,
+        gname: document.forms['guestReg']['gname'].value,
+        gcity: document.forms['guestReg']['gcity'].value,
+        gmobile: document.forms['guestReg']['gmobile'].value,
+      });
+      var geventname = document.forms['guestReg']['eventname'].value;
+      var gname = document.forms['guestReg']['gname'].value;
+      var gcity = document.forms['guestReg']['gcity'].value;
+      var gmobile = document.forms['guestReg']['gmobile'].value;
+
+      if (geventname == "") {
+        alert("add event name in guest list");
+        return false;
+      } else if (gname == "") {
+        alert("guest name can not be blank");
+        return false;
+      } else if (gcity == "") {
+        alert("guest city can not be blank");
+        return false;
+      } else if (gmobile == "") {
+        alert("guest mobile can not be blank");
+        return false;
+      }
+      localStorage.setItem("guestLocalData", JSON.stringify(garr));
+      gshowData();
+    }
+    function gshowData() {
+      ggetData();
+      var tbl = document.getElementById("guestTable");
+      for (i = 0; i < garr.length; i++) {
+        var r = tbl.insertRow();
+        var ename = r.insertCell();
+        var gname = r.insertCell();
+        var gcity = r.insertCell();
+        var gmobile = r.insertCell();
+
+        ename.innerHTML = garr[i].evnetname;
+        gname.innerHTML = garr[i].gname;
+        gcity.innerHTML = garr[i].gcity;
+        gmobile.innerHTML = garr[i].gmobile;
+
+      }
+    }
+
+  </script>
+
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+
+</html>
